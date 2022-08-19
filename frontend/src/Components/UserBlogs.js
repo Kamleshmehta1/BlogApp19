@@ -16,7 +16,7 @@ function UserBlogs() {
   const sendRequest = async () => {
     let data;
     await axios
-      .get(`/api/blog/user/${id}`)
+      .get(`/api/blog/personal/${id}`)
       .then((response) => (data = response.data))
       .catch((err) => console.log(err));
     return data;
