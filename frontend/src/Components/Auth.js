@@ -67,11 +67,13 @@ function Auth() {
         return;
       }
       sendRequest()
-        .then((data) => localStorage.setItem("userID", data.user._id))
+        .then((data) => {
+          localStorage.setItem("userID", data.user._id);
+          localStorage.setItem("userName" + data.user.name);
+        })
         .then(() => addUser(true))
         .then(() => {
           toast.success("Successful Login!");
-          localStorage.setItem("userName",data.user.name);
           navigate("/blogs");
           dispatch({
             type: "VALUE",
