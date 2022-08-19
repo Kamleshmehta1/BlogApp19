@@ -62,8 +62,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 function Headers({ classes }) {
-  const [{ login, value,userName }, dispatch] = UseStateValue();
-
+  const [{ login, value }, dispatch] = UseStateValue();
+  let userName = localStorage.getItem("userName");
   // ---------------------------------------------------------------------------------------
   const location = useLocation();
 
@@ -163,6 +163,7 @@ function Headers({ classes }) {
                     color="error"
                     onClick={() => {
                       handleLogout(false);
+                      localStorage.removeItem("userName");
                       toast.success("Logout successfull!");
                     }}
                     variant="contained"

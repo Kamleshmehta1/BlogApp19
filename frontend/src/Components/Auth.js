@@ -11,7 +11,7 @@ function Auth() {
   const [isSignUp, setSignUp] = useState(false);
   const navigate = useNavigate();
 
-  const [{},dispatch] = UseStateValue();
+  const [{}, dispatch] = UseStateValue();
 
   const addUser = (bool) => {
     dispatch({
@@ -42,7 +42,7 @@ function Auth() {
     });
     return data;
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignUp) {
@@ -71,6 +71,7 @@ function Auth() {
         .then(() => addUser(true))
         .then(() => {
           toast.success("Successful Login!");
+          localStorage.setItem("userName",data.user.name);
           navigate("/blogs");
           dispatch({
             type: "VALUE",
