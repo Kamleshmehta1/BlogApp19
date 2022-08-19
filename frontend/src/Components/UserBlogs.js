@@ -68,7 +68,6 @@ function UserBlogs() {
       >
         PERSONAL BLOGS
       </h1>
-      <img src="https://i.stack.imgur.com/YxytF.png" alt="" />
       {user &&
         user.blogs &&
         user.blogs.map((ele) => (
