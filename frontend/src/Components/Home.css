@@ -1,0 +1,130 @@
+.main-container {
+  height: auto;
+  background-color: rgb(224, 224, 224);
+}
+
+.banner-container {
+  background-size: cover;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-article {
+  z-index: 1;
+  font-weight: bolder;
+  margin-top: 60px;
+  font-size: 4rem;
+  text-align: center;
+  color: #fff;
+}
+
+.main-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-weight: bolder;
+  font-size: 2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  background-color: transparent;
+  height: 50vh;
+  top: -100px;
+}
+
+.child-card {
+  flex: 25%;
+  cursor: pointer;
+  background-color: #fff;
+  margin: 40px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.img1-container {
+  background-image: url("./images/2.jpg");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 400px;
+  transition: background-image 1500ms;
+}
+
+.img1-container:hover {
+  background-image: url("./images/3.jpg");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 400px;
+}
+
+.img2-container {
+  background-image: url("./images/4.jpg");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 400px;
+  transition: background-image 1500ms;
+}
+
+.img2-container:hover {
+  background-image: url("./images/5.jpg");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 400px;
+}
+
+.img3-container {
+  background-image: url("./images/12.jpg");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 400px;
+  transition: background-image 1500ms;
+}
+
+.img3-container:hover {
+  background-image: url("./images/13.jpg");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 400px;
+}
+
+.img-border {
+  border-radius: 20px;
+}
+
+.title-blogs {
+  text-align: center;
+  position: relative;
+  color: #fff;
+}
+
+.login-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: red;
+  color: #fff;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .child-card {
+    flex: 100%;
+    width: auto;
+  }
+  .card-container {
+    height: auto;
+  }
+}
