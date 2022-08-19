@@ -13,13 +13,6 @@ function Auth() {
 
   const [{}, dispatch] = UseStateValue();
 
-  const addUser = (bool) => {
-    dispatch({
-      type: "LOGIN",
-      login: bool,
-    });
-  };
-
   const handleChange = (e) => {
     setInput((prevState) => ({
       ...prevState,
@@ -36,10 +29,6 @@ function Auth() {
       })
       .catch((err) => console.log("err" + err));
     let data = await res.data;
-    dispatch({
-      type: "USER",
-      userName: data.user.name,
-    });
     return data;
   };
 
@@ -52,7 +41,12 @@ function Auth() {
       }
       sendRequest("signup")
         .then((data) => localStorage.setItem("userID", data.user._id))
-        .then(() => addUser(false))
+        .then(() => {
+          dispatch({
+            type: "LOGIN",
+            login: false,
+          });
+        })
         .then(() => toast.success("Successful Signup!"))
         .then(() => {
           navigate("/auth");
@@ -69,9 +63,14 @@ function Auth() {
       sendRequest()
         .then((data) => {
           localStorage.setItem("userID", data.user._id);
-          localStorage.setItem("userName" + data.user.name);
+          localStorage.setItem("userName", data.user.name);
         })
-        .then(() => addUser(true))
+        .then(() => {
+          dispatch({
+            type: "LOGIN",
+            login: true,
+          });
+        })
         .then(() => {
           toast.success("Successful Login!");
           navigate("/blogs");
