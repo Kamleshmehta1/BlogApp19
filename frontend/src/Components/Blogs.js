@@ -29,6 +29,7 @@ function Blogs() {
       .get(`/api/blog/${search}`)
       .then((response) => (data = response.data))
       .catch((err) => console.log(err));
+    console.log("all" + data);
     return data;
   };
 
@@ -71,7 +72,7 @@ function Blogs() {
   };
 
   return (
-    <div style={{position:"relative"}}>
+    <div style={{ position: "relative" }}>
       <h1
         style={{
           margin: "100px auto 50px auto",

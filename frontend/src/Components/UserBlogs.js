@@ -19,6 +19,7 @@ function UserBlogs() {
       .get(`/api/blog/personal/${id}`)
       .then((response) => (data = response.data))
       .catch((err) => console.log(err));
+    console.log("myBlogs" + data);
     return data;
   };
 
@@ -27,7 +28,7 @@ function UserBlogs() {
       setUser(data.user);
     });
   });
-  
+
   const navigate = useNavigate();
   const [{}, dispatch] = UseStateValue();
   const handleEdit = () => {
@@ -56,7 +57,7 @@ function UserBlogs() {
   };
 
   return (
-    <div style={{position:"relative"}}>
+    <div style={{ position: "relative" }}>
       <h1
         style={{
           margin: "100px auto 50px auto",
