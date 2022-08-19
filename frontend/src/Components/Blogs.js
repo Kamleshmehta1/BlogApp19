@@ -1,20 +1,15 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import "./Blog.css";
-import { useNavigate } from "react-router-dom";
+import Blog from "./Blog";
 import { useState } from "react";
-import { IconButton } from "@mui/material";
 import { UseStateValue } from "./StateProvider";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 function Blogs() {
   const [blogs, setBlogs] = useState();
-  const [{ search }, dispatch] = UseStateValue();
+  const [{ search }] = UseStateValue();
 
   const sendRequestforAll = async (key) => {
+    //send all data if search box is empty
     let data;
     await axios
       .get(`/api/blog`)
@@ -24,12 +19,12 @@ function Blogs() {
   };
 
   const searchRequest = async (key) => {
+    // search specific data
     let data;
     await axios
       .get(`/api/blog/${search}`)
       .then((response) => (data = response.data))
       .catch((err) => console.log(err));
-    console.log("all" + data);
     return data;
   };
 
@@ -45,34 +40,8 @@ function Blogs() {
     }
   }, [search]);
 
-  const navigate = useNavigate();
-  const handleEdit = (id) => {
-    navigate(`/myBlogs/${id}`);
-  };
-  const deleteRequest = async (id) => {
-    let data;
-    await axios
-      .delete(`/api/blog/${id}`)
-      .then((response) => (data = response.data))
-      .catch((err) => console.log(err));
-    return data;
-  };
-
-  const handleDelete = () => {
-    deleteRequest()
-      .then((data) => console.log(data))
-      .then(() => {
-        navigate("/myBlogs");
-        toast.success("Blog deleted !");
-        dispatch({
-          type: "VALUE",
-          value: 1,
-        });
-      });
-  };
-
   return (
-    <div style={{ position: "relative" }}>
+    <>
       <h1
         style={{
           margin: "100px auto 50px auto",
@@ -85,73 +54,18 @@ function Blogs() {
       </h1>
       {blogs &&
         blogs.map((ele, index) => (
-          <div key={ele._id}>
-            <div className="card">
-              <div className="thumbnail">
-                <img className="left" src={ele.image} alt="-" />
-              </div>
-              <div className="right">
-                {localStorage.getItem("userID") === ele.user._id && (
-                  <>
-                    <IconButton
-                      onClick={() => handleEdit(ele._id)}
-                      sx={{ position: "absolute", right: "40px" }}
-                    >
-                      <ModeEditOutlineIcon color="warning" />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => handleDelete(ele._id)}
-                      sx={{ position: "absolute", right: "7px" }}
-                    >
-                      <DeleteForeverIcon color="error" />
-                    </IconButton>
-                  </>
-                )}
-                <h1 className="h1">
-                  {
-                    (ele.title =
-                      ele.title === null
-                        ? ""
-                        : ele.title.charAt(0).toUpperCase() +
-                          ele.title.slice(1))
-                  }
-                </h1>
-                <div className="author">
-                  <h2 className="h2">
-                    {ele.user.name === null
-                      ? "User"
-                      : ele.user.name.charAt(0).toUpperCase() +
-                        ele.user.name.slice(1)}
-                  </h2>
-                </div>
-                <div className="separator"></div>
-                <p className="p">
-                  {ele.description == null
-                    ? ""
-                    : ele.description.charAt(0).toUpperCase() +
-                      ele.description.slice(1)}
-                </p>
-              </div>
-              <h5 className="h5">
-                {ele.date === null ? "" : ele.date.toString().slice(-2)}
-              </h5>
-              <h6 className="h6">
-                {ele.date === null
-                  ? ""
-                  : ele.date
-                      .toString()
-                      .substring(0, ele.date.toString().indexOf(" "))}
-              </h6>
-              <div className="fab">
-                {ele.user.name === null
-                  ? "User"
-                  : ele.user.name.charAt(0).toUpperCase()}
-              </div>
-              <ToastContainer />
-            </div>
-          </div>
+          <Blog
+            key={ele._id}
+            id={ele._id}
+            date={ele.date}
+            isUser={localStorage.getItem("userID") === ele.user._id}
+            title={ele.title}
+            description={ele.description}
+            imageURL={ele.image}
+            userName={ele.user.name}
+          />
         ))}
-    </div>
+    </>
   );
 }
 

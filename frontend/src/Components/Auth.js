@@ -11,7 +11,7 @@ function Auth() {
   const [isSignUp, setSignUp] = useState(false);
   const navigate = useNavigate();
 
-  const [{}, dispatch] = UseStateValue();
+  const [{},dispatch] = UseStateValue();
 
   const addUser = (bool) => {
     dispatch({
@@ -36,10 +36,13 @@ function Auth() {
       })
       .catch((err) => console.log("err" + err));
     let data = await res.data;
-    localStorage.setItem("userName", data.user.name);
+    dispatch({
+      type: "USER",
+      userName: data.user.name,
+    });
     return data;
   };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignUp) {
@@ -75,6 +78,7 @@ function Auth() {
           });
         })
         .catch((err) => {
+          // navigate(0);
           toast.warn("No user found!");
         });
     }
