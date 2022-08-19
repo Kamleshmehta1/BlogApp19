@@ -67,6 +67,7 @@ function UserBlogs() {
       >
         PERSONAL BLOGS
       </h1>
+      <img src="https://musemaster.net/prebook-html/assets/book-mockup.png" alt="" />
       {user &&
         user.blogs &&
         user.blogs.map((ele) => (
