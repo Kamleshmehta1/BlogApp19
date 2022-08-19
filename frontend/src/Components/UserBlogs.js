@@ -27,7 +27,7 @@ function UserBlogs() {
       setUser(data.user);
     });
   });
-  // -----------------------------------------------------------------------------------------
+  
   const navigate = useNavigate();
   const [{}, dispatch] = UseStateValue();
   const handleEdit = () => {
@@ -54,10 +54,9 @@ function UserBlogs() {
         });
       });
   };
-  // -----------------------------------------------------------------------------------------
 
   return (
-    <>
+    <div style={{position:"relative"}}>
       <h1
         style={{
           margin: "100px auto 50px auto",
@@ -136,7 +135,7 @@ function UserBlogs() {
             </div>
           </div>
         ))}
-    </>
+    </div>
   );
 }
 

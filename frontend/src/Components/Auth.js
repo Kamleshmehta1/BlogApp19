@@ -75,7 +75,6 @@ function Auth() {
           });
         })
         .catch((err) => {
-          // navigate(0);
           toast.warn("No user found!");
         });
     }

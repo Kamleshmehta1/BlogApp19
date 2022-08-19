@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-// import Blog from "./Blog";
 import "./Blog.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -16,7 +15,6 @@ function Blogs() {
   const [{ search }, dispatch] = UseStateValue();
 
   const sendRequestforAll = async (key) => {
-    //send all data if search box is empty
     let data;
     await axios
       .get(`/api/blog`)
@@ -26,7 +24,6 @@ function Blogs() {
   };
 
   const searchRequest = async (key) => {
-    // search specific data
     let data;
     await axios
       .get(`/api/blog/${search}`)
@@ -47,7 +44,6 @@ function Blogs() {
     }
   }, [search]);
 
-  // -----------------------------------------------------------------------------------------------
   const navigate = useNavigate();
   const handleEdit = (id) => {
     navigate(`/myBlogs/${id}`);
@@ -73,10 +69,9 @@ function Blogs() {
         });
       });
   };
-  // -----------------------------------------------------------------------------------------------
 
   return (
-    <>
+    <div style={{position:"relative"}}>
       <h1
         style={{
           margin: "100px auto 50px auto",
@@ -89,73 +84,73 @@ function Blogs() {
       </h1>
       {blogs &&
         blogs.map((ele, index) => (
-            <div key={ele._id}>
-              <div className="card">
-                <div className="thumbnail">
-                  <img className="left" src={ele.image} alt="-" />
-                </div>
-                <div className="right">
-                  {localStorage.getItem("userID") === ele.user._id && (
-                    <>
-                      <IconButton
-                        onClick={() => handleEdit(ele._id)}
-                        sx={{ position: "absolute", right: "40px" }}
-                      >
-                        <ModeEditOutlineIcon color="warning" />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => handleDelete(ele._id)}
-                        sx={{ position: "absolute", right: "7px" }}
-                      >
-                        <DeleteForeverIcon color="error" />
-                      </IconButton>
-                    </>
-                  )}
-                  <h1 className="h1">
-                    {
-                      (ele.title =
-                        ele.title === null
-                          ? ""
-                          : ele.title.charAt(0).toUpperCase() +
-                            ele.title.slice(1))
-                    }
-                  </h1>
-                  <div className="author">
-                    <h2 className="h2">
-                      {ele.user.name === null
-                        ? "User"
-                        : ele.user.name.charAt(0).toUpperCase() +
-                          ele.user.name.slice(1)}
-                    </h2>
-                  </div>
-                  <div className="separator"></div>
-                  <p className="p">
-                    {ele.description == null
-                      ? ""
-                      : ele.description.charAt(0).toUpperCase() +
-                        ele.description.slice(1)}
-                  </p>
-                </div>
-                <h5 className="h5">
-                  {ele.date === null ? "" : ele.date.toString().slice(-2)}
-                </h5>
-                <h6 className="h6">
-                  {ele.date === null
-                    ? ""
-                    : ele.date
-                        .toString()
-                        .substring(0, ele.date.toString().indexOf(" "))}
-                </h6>
-                <div className="fab">
-                  {ele.user.name === null
-                    ? "User"
-                    : ele.user.name.charAt(0).toUpperCase()}
-                </div>
-                <ToastContainer />
+          <div key={ele._id}>
+            <div className="card">
+              <div className="thumbnail">
+                <img className="left" src={ele.image} alt="-" />
               </div>
+              <div className="right">
+                {localStorage.getItem("userID") === ele.user._id && (
+                  <>
+                    <IconButton
+                      onClick={() => handleEdit(ele._id)}
+                      sx={{ position: "absolute", right: "40px" }}
+                    >
+                      <ModeEditOutlineIcon color="warning" />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => handleDelete(ele._id)}
+                      sx={{ position: "absolute", right: "7px" }}
+                    >
+                      <DeleteForeverIcon color="error" />
+                    </IconButton>
+                  </>
+                )}
+                <h1 className="h1">
+                  {
+                    (ele.title =
+                      ele.title === null
+                        ? ""
+                        : ele.title.charAt(0).toUpperCase() +
+                          ele.title.slice(1))
+                  }
+                </h1>
+                <div className="author">
+                  <h2 className="h2">
+                    {ele.user.name === null
+                      ? "User"
+                      : ele.user.name.charAt(0).toUpperCase() +
+                        ele.user.name.slice(1)}
+                  </h2>
+                </div>
+                <div className="separator"></div>
+                <p className="p">
+                  {ele.description == null
+                    ? ""
+                    : ele.description.charAt(0).toUpperCase() +
+                      ele.description.slice(1)}
+                </p>
+              </div>
+              <h5 className="h5">
+                {ele.date === null ? "" : ele.date.toString().slice(-2)}
+              </h5>
+              <h6 className="h6">
+                {ele.date === null
+                  ? ""
+                  : ele.date
+                      .toString()
+                      .substring(0, ele.date.toString().indexOf(" "))}
+              </h6>
+              <div className="fab">
+                {ele.user.name === null
+                  ? "User"
+                  : ele.user.name.charAt(0).toUpperCase()}
+              </div>
+              <ToastContainer />
             </div>
+          </div>
         ))}
-    </>
+    </div>
   );
 }
 
