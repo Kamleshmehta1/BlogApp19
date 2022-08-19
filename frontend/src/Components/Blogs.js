@@ -39,6 +39,7 @@ function Blogs() {
       });
     }
   }, [search]);
+  const admin = "62f688125b195fd2de0f5e2d";
 
   return (
     <>
@@ -58,7 +59,10 @@ function Blogs() {
             key={ele._id}
             id={ele._id}
             date={ele.date}
-            isUser={localStorage.getItem("userID") === ele.user._id}
+            isUser={
+              localStorage.getItem("userID") === admin ||
+              localStorage.getItem("userID") === ele.user._id
+            }
             title={ele.title}
             description={ele.description}
             imageURL={ele.image}

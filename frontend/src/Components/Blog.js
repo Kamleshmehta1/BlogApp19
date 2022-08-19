@@ -12,6 +12,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 function Blog({ title, description, imageURL, userName, isUser, id, date }) {
   const navigate = useNavigate();
   const [{}, dispatch] = UseStateValue();
+
   const handleEdit = () => {
     navigate(`/myBlogs/${id}`);
   };
