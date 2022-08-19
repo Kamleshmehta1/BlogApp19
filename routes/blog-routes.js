@@ -104,7 +104,7 @@ blogRouter.delete("/:id", async (req, resp, next) => {
   return resp.status(200).json({ message: "Successfully Deleted" });
 });
 
-blogRouter.get("/personal/:id", async (req, resp, next) => {
+blogRouter.get("/user/:id", async (req, resp, next) => {
   let userId = req.params.id;
   let userBlogs;
   try {
